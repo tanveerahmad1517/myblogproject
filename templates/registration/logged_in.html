@@ -1,0 +1,7 @@
+{% extends "posts/layout.html" %}
+{% block content %}
+{% if user.is_authenticated %}
+        <p>Welcome {{ user.username }} !!!</p>       
+    {% endif %}
+
+    {% endblock %}

@@ -1,0 +1,25 @@
+{% extends "posts/layout.html" %}
+{% block title %} {{ course.title }} {% endblock %}
+{% block content %}
+
+
+<div class="container">
+ <div class="row">
+    <div class="cover_img">
+         <img src="{{ post.image.url }}" height="150">
+    </div>
+  <div class="col s12 col m8"> 
+       
+        <h3> About This Course </h3>
+        <h4> {{ post.title }} </h4>
+            <p> {{ post.content }} </p>
+
+ </div>
+                     
+</div>
+</div>
+
+{% endblock %}
+
+
+
