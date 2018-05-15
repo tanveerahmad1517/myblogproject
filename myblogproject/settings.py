@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '^b)8+uat8i(a8^cwpjhjwo$9pq=d8i$yd$ptoadsxe!9bl!8dh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["tanveerahmedst.pythonanywhere.com"]
 
 
 # Application definition
@@ -124,3 +124,14 @@ LOGIN_REDIRECT_URL = 'posts:all'
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+if not DEBUG:
+    MEDIA_URL = '/media/'
+    STATIC_ROOT = "/home/tanveerahmedst/myblogproject/assets/static/"
+    MEDIA_ROOT = "/home/tanveerahmedst/myblogproject/assets/media/"
+    STATICFILES_DIRS = (
+        "/home/tanveerahmedst/myblogproject/assets/static/",
+    )
+    TEPLATE_DIRS = (
+        "/home/tanveerahmedst/myblogproject/assets/templates"
+    )
+
