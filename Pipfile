@@ -12,6 +12,7 @@ django-heroku = "*"
 django-widget-tweaks = "*"
 pillow = "*"
 requests = "*"
+whitenoise = "*"
 
 
 [requires]
