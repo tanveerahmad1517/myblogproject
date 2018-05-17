@@ -23,9 +23,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, "live-static", "static-root")
 SECRET_KEY = '^b)8+uat8i(a8^cwpjhjwo$9pq=d8i$yd$ptoadsxe!9bl!8dh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['fast-atoll-64312.herokuapp.com']
 
 
 # Application definition
@@ -73,6 +73,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'myblogproject.wsgi.application'
+ DATABASES = {'default': dj_database_url.config()}
 
 
 # Database
@@ -125,11 +126,10 @@ LOGIN_REDIRECT_URL = 'posts:all'
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-STATIC_ROOT = os.path.join(BASE_DIR, "live-static", "static-root")
+STATICFILES_DIRS = [
+      os.path.join(BASE_DIR, "static"),
+    ]
+STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn")
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "live-static", "media_root")
-django_heroku.settings(locals())
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media_cdn")
