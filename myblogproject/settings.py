@@ -11,12 +11,17 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 import os
 import django_heroku
-import dj_database_url
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-STATIC_ROOT = os.path.join(BASE_DIR, "live-static", "static-root")
 
 
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = '****'
+EMAIL_HOST_PASSWORD = '****'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = "sgbackend.SendGridBackend"
+SENDGRID_API_KEY = "***"
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
@@ -74,7 +79,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'myblogproject.wsgi.application'
-DATABASES = {'default': dj_database_url.config()}
+
 
 
 # Database
@@ -87,7 +92,10 @@ DATABASES = {
     }
 }
 
+import dj_database_url
 
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
