@@ -16,8 +16,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = '****'
-EMAIL_HOST_PASSWORD = '****'
+EMAIL_HOST_USER = 'tanveer1517@hotmail.com'
+EMAIL_HOST_PASSWORD = 'tanveer1517'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = "sgbackend.SendGridBackend"
@@ -52,7 +52,6 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -139,6 +138,5 @@ STATICFILES_DIRS = [
       os.path.join(BASE_DIR, "static"),
     ]
 STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn")
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media_cdn")
