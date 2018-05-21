@@ -31,7 +31,7 @@ SECRET_KEY = '^b)8+uat8i(a8^cwpjhjwo$9pq=d8i$yd$ptoadsxe!9bl!8dh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['fierce-bayou-32029.herokuapp.com']
+ALLOWED_HOSTS = ['fast-atoll-64312.herokuapp.com']
 
 
 # Application definition
