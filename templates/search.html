@@ -8,11 +8,8 @@
         <h1>Posts</h1>
            <hr/>
     {% for post in posts %}
-<<<<<<< HEAD
-        <h5> {{post.title}}  
-=======
-        <h5> <a href="{% url 'posts:detail' post.pk %}"> {{post.title}} </a> 
->>>>>>> 68e5f21d50b4c38be59c3f168d82fa28c94792bc
+<b> Search Result: </b> <h5> <a href="{% url 'posts:detail' post.pk %}"> {{post.title}} </a> 
+
         </h5>
     {% empty %}
         <p>No users found</p>
