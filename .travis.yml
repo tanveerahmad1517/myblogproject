@@ -7,6 +7,6 @@ script: python manage.py test
 notifications:
   email:
     recipients:
-      - tanveerobjects@.com
+      - tanveerobjects@gmail.com
     on_success: always # default: change
     on_failure: always # default: always
