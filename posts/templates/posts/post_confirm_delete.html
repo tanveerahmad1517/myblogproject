@@ -1,0 +1,21 @@
+{% extends "posts/layout.html" %}
+
+{% block title_tag %}Delete your message? | {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+<h3>Are you sure you want to delete this message?</h3>
+	{% include "posts/_post.html" with post=object hide_delete=True %}
+
+<form method="POST" class="left">
+	{% csrf_token %}
+
+	<input type="submit" value="Yes, delete it" class="btn btn-danger btn-large">
+	<a href="{% url 'account:profile' post.user.username %}" class="btn btn-simple btn-large btn-default">No, nevermind</a>
+
+</form>
+<br>
+</div>
+</div>
+{% endblock %}

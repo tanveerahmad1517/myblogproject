@@ -8,11 +8,10 @@
     <div class="cover_img">
          <img src="{{ post.image.url }}" height="150">
     </div>
-  <div class="col s12 col m8"> 
-       
-        <h3> About This Course </h3>
+  <div class="col s12 col m12"> 
+
         <h4> {{ post.title }} </h4>
-            <p> {{ post.content }} </p>
+            <p> {{ post.description| safe}} </p>
 
  </div>
                      

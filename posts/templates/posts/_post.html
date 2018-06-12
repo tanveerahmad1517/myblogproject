@@ -5,46 +5,71 @@
 
 
 {% for post in post_list %}
-	</a>
-  <div class="col s12 m4">
-   <div class="card">
- <div class="card-image">
-             <img src="{{ post.image.url }}" height="270">
-        <h5>
-           
-			 {{ post.title }} </a>
-        </h5>
-         
-        
- </div>
-<div class="card-content">
-            <p> {{ post.description|slice:"100" }}</p> 
-</div>
- <div class="card-action">
-  <div class="col s5">
- <a href="{% url 'account:view_profile_with_pk' pk=post.user.pk %}">
-                {{ post.user }} 
-            </a>
- </div>
+  <div class="col s12 m6">
+                  <h4 class="header">{{ post.title }} </h4>
+            <div class="card horizontal">
+              <div class="card-image">
+                <img src="{{ post.image.url }}" height="270">
+              </div>
+              <div class="card-stacked">
+                <div class="card-content">
+                  <p> {{ post.description | safe |slice:"342"  }}<a href="{% url 'posts:detail' post.pk  %}">Read More </a></p> 
+                </div>
+                <div class="card-action">
+                             {% if user.is_authenticated and post.user == user and not hide_delete %}
+   <div class="fixed-action-btn toolbar direction-top" style="transition: transform 0.2s; transform: translate3d(0px, 0px, 0px);">
+      <a class="btn-floating btn-large red" style="transition: transform 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19); transform: translate3d(0px, 0px, 0px);">
+        <i class="large material-icons">mode_edit</i>
+      </a>
+      <ul>
+        <li class="waves-effect waves-light"><a href="#!" style=""><i class="material-icons">insert_chart</i></a></li>
+        <li class="waves-effect waves-light"><a href="{% url 'posts:post_edit' pk=post.pk %}" style=""><i class="material-icons dp48">edit</i></a></li>
+        <li class="waves-effect waves-light"><a href="{% url 'posts:post_delete' pk=post.pk %}" style=""><i class="material-icons dp48">delete</i></a></li>
+        <li class="waves-effect waves-light"><a href="" style=""><i class="material-icons">attach_file</i></a></li>
+      </ul>
+    </div>
+        {% endif %}
+                  <time class="time"><a href="{%url 'posts:detail' post.pk  %}">{{ post.date|naturaltime }}</a></time>
+                    <a href="{% url 'account:profile' post.user.username %}">{{ post.user.profile.get_screen_name }} </a>
 
+                </div>
+     
+           </div>
+      </div>
+  </div>
 
-          <div class="col s7">
-            
-          <time class="time"><a href="{%url 'posts:detail' post.pk  %}">{{ post.publish }}</a></time>
-        </div> 
-         </div> 
-</div>
-</div>
-{% if forloop.counter|divisibleby:3 and not forloop.last %}
+{% if forloop.counter|divisibleby:2 and not forloop.last %}
         </div><br><div class="row">
+
       {% endif %}
     
   {% endfor %}
+</div>
+<ul class="pagination">
+{% if is_paginated %}
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li class="waves-effect"><a href="?page={{ page_obj.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
+
+    {% else %}
+      <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="active">{{ i }} </li>
+      {% else %}
+        <li class="waves-effect"><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+    <li class="waves-effect"><a href="?page={{ page_obj.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
+     
+    {% else %}
+      <li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
 
 </div>
 </div>
-
-</div>
-</div></div>
-
-

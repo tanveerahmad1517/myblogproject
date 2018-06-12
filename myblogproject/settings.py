@@ -29,9 +29,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '^b)8+uat8i(a8^cwpjhjwo$9pq=d8i$yd$ptoadsxe!9bl!8dh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['fast-atoll-64312.herokuapp.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     'account',
     'posts',
     'widget_tweaks',
+    'tinymce',
+    'filebrowser',
+    'grappelli',
 ]
 
 MIDDLEWARE = [
@@ -98,6 +101,10 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
+
+
+
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -112,6 +119,10 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+
+
 
 
 # Internationalization
@@ -134,9 +145,51 @@ LOGIN_REDIRECT_URL = 'posts:all'
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_URL = '/media/'
 
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media_cdn")
+
+
+TINYMCE_DEFAULT_CONFIG = {
+    'height':
+    360,
+    'width':
+    970,
+    'cleanup_on_startup':
+    True,
+    'custom_undo_redo_levels':
+    20,
+    'selector':
+    'textarea',
+    'theme':
+    'modern',
+    'plugins':
+    '''
+            textcolor save link image media preview codesample contextmenu
+            table code lists fullscreen  insertdatetime  nonbreaking
+            contextmenu directionality searchreplace wordcount visualblocks
+            visualchars code fullscreen autolink lists  charmap print  hr
+            anchor pagebreak
+            ''',
+    'toolbar1':
+    '''
+            fullscreen preview bold italic underline | fontselect,
+            fontsizeselect  | forecolor backcolor | alignleft alignright |
+            aligncenter alignjustify | indent outdent | bullist numlist table |
+            | link image media | codesample |
+            ''',
+    'toolbar2':
+    '''
+            visualblocks visualchars |
+            charmap hr pagebreak nonbreaking anchor |  code |
+            ''',
+    'contextmenu':
+    'formats | link image',
+    'menubar':
+    True,
+    'statusbar':
+    True,
+}

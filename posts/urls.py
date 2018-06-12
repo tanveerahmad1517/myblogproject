@@ -5,8 +5,16 @@ from django.urls import path
 
 app_name = 'posts'
 urlpatterns = [
-    path('', views.AllPosts.as_view(), name="all"),
+    path('', views.AllPostList.as_view(), name="all"),
+    # path('posts/', views.posts, name='all'),
     path('<int:pk>/', views.PostDetailView.as_view(), name="detail"),
+    path('create/', views.PostCreateView.as_view(), name="post_create"),
+    path('<int:pk>/edit/', views.PostEditView.as_view(), name="post_edit"),
+    path('<int:pk>/delete/', views.PostDeletePost.as_view(), name="post_delete"),
+    
+    
+    
+    
     
 
 ]

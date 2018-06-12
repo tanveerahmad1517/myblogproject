@@ -1,0 +1,49 @@
+{% extends "posts/layout.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+
+ <div class="container" >
+  <form method="post" enctype="multipart/form-data">
+      <div class="row">
+        <div class="input-field col s12">
+       {% render_field form.user|add_class:'select-dropdown dropdown-trigger'  %}
+       <label for="title"> User </label>
+         </div>
+     </div>
+     <div class="input-field col s12">
+        {% render_field form.title|add_class:'validate' %}
+        <label for="title"> Title </label>
+     </div>
+     <div class="input-field col s12">
+<label for="description"> Dscription </label>
+<br><br>
+      {{ form.media }}
+
+       {% render_field form.description|add_class:'materialize-textarea'  %}
+       
+         
+     </div>
+     
+ <div class="file-field input-field col s12 col m12">
+
+  <div class="btn">
+    <span> {{ form.image.label }}</span>
+    <input type="file" name="{{ form.image.html_name }}">
+  </div>
+  <div class="file-path-wrapper">
+  <input class="file-path validate" type="text">
+</div>
+</div>
+    <button type="submit" class="btn btn-success">
+        <span class="glyphicon glyphicon-ok"></span> Save
+    </button>
+      <a href="{% url 'posts:all' %}" class="btn btn-default">Cancel</a>
+    {% csrf_token %}
+     
+  </form>
+  <br>
+ </div><!-- container -->
+ {% endblock %}
+
+

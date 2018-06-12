@@ -1,0 +1,27 @@
+{% load i18n %}
+{% load humanize %}
+
+{% block content %}
+<li post-id="{{ post.pk }}" csrf="{{ csrf_token }}">
+  <div class="post-container">
+    <a href="{% url 'posts:profile' post.user.username %}"><img
+        src="{{ post.user.profile.get_picture }}" class="user"></a>
+    <div class="post">
+      {% if post.user == user %}
+        <span class="glyphicon glyphicon-remove remove-post"
+              title="{% trans 'Click to remove this post' %}"></span>
+      {% endif %}
+      <h3>
+        <a href="{% url 'posts:profile' post.user.username %}">{{ post.user.profile.get_screen_name }}
+{{post.title}}
+        </a>
+        <small>{{ post.date|naturaltime }}</small>
+      </h3>
+      <p>{{ post.linkfy_post|safe }}</p>
+
+   
+      </div>
+    </div>
+  </div>
+</li>
+{% endblock %}

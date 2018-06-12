@@ -1,18 +1,141 @@
-{% extends "posts/layout.html" %}
+{% extends 'posts/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% load humanize %}
 
+{% block title %}{{ page_user.profile.get_screen_name }}{% endblock %}
+
+{% block head %}
+  <link href="{% static 'css/profile.css' %}" rel="stylesheet">
+  <link href="{% static 'css/posts.css' %}" rel="stylesheet">
+  <link href="{% static 'css/top_tiles.css' %}" rel="stylesheet">
+  <script src="{% static 'js/posts.js' %}"></script>
+  <script src="{% static 'js/jquery.bullseye-1.0-min.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" type="text/javascript"></script>
+{% endblock head %}
+{% block extrahead %}
+
+{% endblock extrahead %}
 {% block content %}
-<div class="container">
-    <h1>Profile</h1>
-    <p>Username: {{ user }}</p>
-    <p>First name: {{ user.first_name }}</p>
-    <p>Last name: {{ user.last_name }}</p>
-    <p>Email: {{ user.email }}</p>
-    <p>Description: {{ user.userprofile.description }}</p>
-    <p>Phone: +{{ user.userprofile.phone }}</p>
-    <p>City: {{ user.userprofile.city }}</p>
-    <p>Website: {{ user.userprofile.website }}</p>
-    {% if user.userprofile.image %}
-    <img src="{{ user.userprofile.image.url }}" width="240">
+  <div class="page-header">
+    <h1>{{ page_user.profile.get_screen_name }} {% if page_user.get_full_name %}<small>({{ page_user.username }})</small>{% endif %}</h1>
+  </div>
+  <div class="profile">
+    <div class="row tile_count">
+      <!-- Data tiles -->
+      <div class="col-md-2 col-sm-3 col-xs-4 tile_stats_count">
+        <span class="count_top"><i class="glyphicon glyphicon-envelope"></i> {% trans 'Posts' %}</span>
+        <div class="count">{{ posts_count }}</div>
+      </div>
+      
+      <!-- /data tiles -->
+    </div>
+    <div class="row">
+      <!--Profile tile-->
+      <div class="col m3 col s12 user-profile">
+      {% if page_user.profile.get_picture %}
+        <img src="{{ page_user.profile.get_picture.url }}" class="picture">
+      {% else %}
+        <img src="{% static 'images/user.png' %}">
+      {% endif %}
+
+        <ul>
+          {% if page_user.profile.job_title %}
+            <li><i class="material-icons"> attach_money </i> {{ page_user.profile.job_title }}</li>
+          {% endif %}
+          {% if page_user.profile.location %}
+            <li><i class="material-icons">location_on</i> {{ page_user.profile.location }}</li>
+          {% endif %}
+          {% if page_user.profile.url %}
+            <li><i class="material-icons">web </i> <a href="{{ page_user.profile.url }}" target="_blank">{{ page_user.profile.url }}</a></li>
+          {% endif %}
+          {% if page_user.profile.gender == 'Male' %}
+          <li><i class="material-icons sep">person_pin </i>{{ page_user.profile.gender }}</li>
+          {% elif page_user.profile.gender == 'Female' %}
+          <li><i class="material-icons sep">person_pin </i> {{ page_user.profile.gender }}</li>
+          {% else %}
+          <li><i class="material-icons sep">person_pin </i> Please Select Gender </li>
+          {% endif %}
+        </ul>
+      </div>
+      <!--Profile tile-->
+      <!--Bar graphic chart-->
+      <div class="col m9 col s12">
+          
+           <h1> {% trans 'Posts' %} By {{ page_user.profile.get_screen_name }} </h1>
+      </div>  
+      </div>    
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="1b">
+              <ul class="stream">
+                {% for post in posts %}
+ <div class="col s12 m6">
+                  <h4 class="header">{{ post.title }} </h4>
+            <div class="card horizontal">
+              <div class="card-image">
+                <img src="{{ post.image.url }}" height="270">
+              </div>
+              <div class="card-stacked">
+                <div class="card-content">
+                  <p> {{ post.description| safe | truncatechars_html:330 }}<a href="{% url 'posts:detail' post.pk  %}">Read More </a></p> 
+                </div>
+                <div class="card-action">
+                             {% if user.is_authenticated and post.user == user and not hide_delete %}
+   <div class="fixed-action-btn toolbar direction-top" style="transition: transform 0.2s; transform: translate3d(0px, 0px, 0px);">
+      <a class="btn-floating btn-large red" style="transition: transform 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19); transform: translate3d(0px, 0px, 0px);">
+        <i class="large material-icons">mode_edit</i>
+      </a>
+      <ul>
+        <li class="waves-effect waves-light"><a href="#!" style=""><i class="material-icons">insert_chart</i></a></li>
+        <li class="waves-effect waves-light"><a href="{% url 'posts:post_edit' pk=post.pk %}" style=""><i class="material-icons dp48">edit</i></a></li>
+        <li class="waves-effect waves-light"><a href="{% url 'posts:post_delete' pk=post.pk %}" style=""><i class="material-icons dp48">delete</i></a></li>
+        <li class="waves-effect waves-light"><a href="" style=""><i class="material-icons">attach_file</i></a></li>
+      </ul>
+    </div>
+        {% endif %}
+                  <time class="time"><a href="{%url 'posts:detail' post.pk  %}">{{ post.date|naturaltime }}</a></time>
+                    <a href="{% url 'account:profile' post.user.username %}">{{ post.user.profile.get_screen_name }} </a>
+
+                </div>
+     
+           </div>
+      </div>
+  </div>
+
+{% if forloop.counter|divisibleby:2 and not forloop.last %}
+        </div><br><div class="row">
+
+      {% endif %}
+    
+  {% endfor %}
+</div>
+<ul class="pagination">
+{% if is_paginated %}
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li class="waves-effect"><a href="?page={{ page_obj.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
+
+    {% else %}
+      <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
     {% endif %}
-    {% endblock %}
-</div><br>
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="active">{{ i }} </li>
+      {% else %}
+        <li class="waves-effect"><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+    <li class="waves-effect"><a href="?page={{ page_obj.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
+     
+    {% else %}
+      <li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+
+</div>
+</div>
+{% endblock %}

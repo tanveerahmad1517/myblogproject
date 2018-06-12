@@ -1,18 +1,35 @@
-from django.db import models
+from __future__ import unicode_literals
 
-# Create your models here.
-from django.conf import settings
+import json
+
 from django.contrib.auth.models import User
+from django.db import models
+from django.db.models.signals import post_save
+from django.utils.encoding import python_2_unicode_compatible
+from django.utils.html import escape
+from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse
+from tinymce.models import HTMLField
+
+
 class Post(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="posts")
-    users = models.ManyToManyField(User)
-    created = models.DateTimeField(auto_now_add=True)
-    title = models.CharField(max_length=120)
-    title_html = models.TextField(editable=False)
-    content = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    title = models.TextField(max_length=255)
+    description = HTMLField('Description')
     image = models.ImageField(upload_to="Post_images", default='media/default.png')
-    draft = models.BooleanField(default=False)
-    publish = models.DateField(auto_now=False,auto_now_add=False,)
-    slug = models.SlugField(unique=True)
+
+
+    def get_absolute_url(self):
+        return reverse('posts:all')
+
+
+    
+    class Meta:
+        verbose_name = _('Post')
+        verbose_name_plural = _('Posts')
+        ordering = ('-date',)
+
     def __str__(self):
         return self.title
+

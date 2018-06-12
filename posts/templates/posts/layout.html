@@ -33,8 +33,9 @@
       <ul class="right hide-on-med-and-down">
        {% if user.is_authenticated %}
         
-
-          <li><a href="{% url 'logout' %}"> Logout </a></li>          
+      <li> <a href="{% url 'account:profile' user.username %}">{{ user.profile.get_screen_name }} </a> </li>
+          <li><a href="{% url 'logout' %}"> Logout </a></li>    
+          <li><a href="{% url 'posts:post_create' %}"> Create Post </a></li>          
        {% else %}
           <li> <a href="{% url 'login' %}">Log in </a></li>
            <li> <a href="{% url 'signup' %}">Sign Up </a></li>
@@ -97,16 +98,16 @@
   </div>
 </footer>
 {% endblock footer %}
-
-<!--  Scripts-->
+    <script src="{% static 'bootstrap/js/popper.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+     <!--  Scripts-->
   <script src="{% static 'js/jquery.js' %}"></script>
   <script src="{% static 'js/materialize.js' %}"></script>
   <script src="{% static 'js/init.js' %}"></script>
    <script src="{% static 'js/drop.js' %}"></script>
- 
-
-    <script src="{% static 'bootstrap/js/popper.min.js' %}"></script>
-    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/dropdown.js' %}"></script>
+     <script src="{% static 'js/forms.js' %}"></script>
+         <script src="{% static 'js/waves.js' %}"></script>
     {% block javascript %}{% endblock %}
 </body>
 </html>
