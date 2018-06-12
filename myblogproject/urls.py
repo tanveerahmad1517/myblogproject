@@ -21,7 +21,7 @@ from django.contrib.auth.views import LoginView
 
 from django.conf import settings
 from django.conf.urls import include, url 
-from search import views as search_views
+# from search import views as search_views
 from filebrowser.sites import site
 
 from django.conf.urls.static import static
@@ -37,9 +37,9 @@ urlpatterns = [
     path('login/', LoginView.as_view(redirect_authenticated_user=True), name='login'),
     path('signup/', views.SignUpView.as_view(), name="signup"),
     path('search/', SearchView.as_view(), name='search'),
-    url(r'^autocomplete/$',
-        search_views.get_autocomplete_suggestions, name='autocomplete'),
-    url(r'^search/$', search_views.search, name='search'), 
+    # url(r'^autocomplete/$',
+    #     search_views.get_autocomplete_suggestions, name='autocomplete'),
+    # url(r'^search/$', search_views.search, name='search'), 
    
 
 ]
