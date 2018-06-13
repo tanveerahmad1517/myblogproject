@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 import os
-import django_heroku
+# import django_heroku
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -29,9 +29,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '^b)8+uat8i(a8^cwpjhjwo$9pq=d8i$yd$ptoadsxe!9bl!8dh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["tanveerahmedst.pythonanywhere.com"]
+
 
 
 # Application definition
@@ -47,9 +48,9 @@ INSTALLED_APPS = [
     'account',
     'posts',
     'widget_tweaks',
-    # 'tinymce',
-    # 'filebrowser',
-    # 'grappelli',
+    'tinymce',
+    'filebrowser',
+
 ]
 
 MIDDLEWARE = [
@@ -145,16 +146,31 @@ LOGIN_REDIRECT_URL = 'posts:all'
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
+if not DEBUG:
+    MEDIA_URL = '/media/'
+    STATIC_ROOT = "/home/tanveerahmedst/myblogproject/static_cdn/"
+    MEDIA_ROOT = "/home/tanveerahmedst/myblogproject/media_cdn/"
+    STATICFILES_DIRS = (
+        "/home/tanveerahmedst/myblogproject/static_cdn/",
+    )
+    TEPLATE_DIRS = (
+        "/home/tanveerahmedst/myblogproject/assets/templates"
+    )
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn")
-MEDIA_ROOT = os.path.join(BASE_DIR, "media_cdn")
+
+
+
+# MEDIA_URL = '/media/'
+
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+# STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn")
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media_cdn")
 
 
 TINYMCE_DEFAULT_CONFIG = {
-    'height':
+'height':
     360,
     'width':
     970,
@@ -193,3 +209,4 @@ TINYMCE_DEFAULT_CONFIG = {
     'statusbar':
     True,
 }
+

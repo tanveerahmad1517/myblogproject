@@ -20,7 +20,7 @@ from myblogproject import views
 from django.contrib.auth.views import LoginView
 
 from django.conf import settings
-from django.conf.urls import include, url 
+from django.conf.urls import include, url
 # from search import views as search_views
 from filebrowser.sites import site
 
@@ -29,8 +29,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    # url(r'^admin/filebrowser/', site.urls),
-    # path('tinymce/', include('tinymce.urls')),
+    url(r'^admin/filebrowser/', site.urls),
+    path('tinymce/', include('tinymce.urls')),
 
     path('', include('posts.urls')),
     path('account/', include('account.urls')),
@@ -39,15 +39,13 @@ urlpatterns = [
     path('search/', SearchView.as_view(), name='search'),
     # url(r'^autocomplete/$',
     #     search_views.get_autocomplete_suggestions, name='autocomplete'),
-    # url(r'^search/$', search_views.search, name='search'), 
-   
+    # url(r'^search/$', search_views.search, name='search'),
+
 
 ]
 urlpatterns += [
     path('', include('django.contrib.auth.urls')),
 ]
 if settings.DEBUG:
-    urlpatterns += static(
-        settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(
-        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL , document_root = settings.STATIC_ROOT )
+    urlpatterns += static(settings.MEDIA_URL , document_root = settings.MEDIA_ROOT )

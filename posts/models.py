@@ -9,7 +9,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.html import escape
 from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse
-from tinymce.models import HTMLField
+from tinymce import HTMLField
 
 
 class Post(models.Model):
@@ -24,7 +24,7 @@ class Post(models.Model):
         return reverse('posts:all')
 
 
-    
+
     class Meta:
         verbose_name = _('Post')
         verbose_name_plural = _('Posts')

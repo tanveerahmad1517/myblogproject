@@ -21,7 +21,8 @@ class PostDetailView(DetailView):
     template_name = 'posts/detail.html'
 class PostCreateView(CreateView):
     form_class = forms.PostForm
-    model = Post 
+    model = Post
+    # fields = '__all__'
     template_name = 'posts/post_create.html'
 
 
