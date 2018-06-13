@@ -47,9 +47,9 @@ INSTALLED_APPS = [
     'account',
     'posts',
     'widget_tweaks',
-    'tinymce',
-    'filebrowser',
-    'grappelli',
+    # 'tinymce',
+    # 'filebrowser',
+    # 'grappelli',
 ]
 
 MIDDLEWARE = [
@@ -147,10 +147,10 @@ LOGIN_REDIRECT_URL = 'posts:all'
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'assets')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-STATIC_ROOT = os.path.join(BASE_DIR, "assets", "static_cdn")
-MEDIA_ROOT = os.path.join(BASE_DIR, "assets", "media_cdn")
+STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media_cdn")
 
 
 TINYMCE_DEFAULT_CONFIG = {
