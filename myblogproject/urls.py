@@ -33,6 +33,8 @@ urlpatterns = [
     url(r'^admin/filebrowser/', site.urls),
     path('tinymce/', include('tinymce.urls')),
     path('contact/', views.contact, name='contact'),
+    path('success/', views.successView, name='success'),
+
 
     path('', include('posts.urls')),
     path('account/', include('account.urls')),

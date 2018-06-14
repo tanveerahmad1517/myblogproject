@@ -57,8 +57,11 @@ def contact(request):
                 headers = {'Reply-To': contact_email }
             )
             email.send()
-            return redirect('contact')
+            return redirect('success')
 
     return render(request, 'contactus.html', {
         'form': form_class,
     })
+
+def successView(request):
+    return render(request, 'success.html')
