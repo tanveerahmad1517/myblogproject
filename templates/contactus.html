@@ -1,9 +1,12 @@
 {% extends "posts/layout.html" %}
 {% block content %}
 <h1>Contact</h1>
-<form role="form" action="" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-</form>
+  <form role="form" action="" method="post">
+  {% csrf_token %}
+  {{ form.as_p }} 
+  <button type="submit" class="btn btn-success">
+        <span class="glyphicon glyphicon-ok"></span> Submit
+    </button>   
+  </form>
+  <br>
 {% endblock %}
