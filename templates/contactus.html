@@ -1,7 +1,6 @@
 {% extends "posts/layout.html" %}
 {% block content %}
 <h1>Contact</h1>
-{% block content %}
   <form role="form" action="" method="post">
   {% csrf_token %}
   {{ form.as_p }} 
@@ -10,5 +9,4 @@
     </button>   
   </form>
   <br>
- </div><!-- container -->
 {% endblock %}

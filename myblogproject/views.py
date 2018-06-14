@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import get_template
 from django.views.generic.edit import CreateView, View
 from django.contrib.auth.forms import UserCreationForm
