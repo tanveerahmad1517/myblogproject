@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, 
+from django.shortcuts import render, get_object_or_404
 from django.template.loader import get_template
 from django.views.generic.edit import CreateView, View
 from django.contrib.auth.forms import UserCreationForm
@@ -21,7 +21,7 @@ class SearchView(View):
                     Q(title__icontains=query)
                 )
         context = {"posts": qs}
-        return render(request, "search.html", context)    
+        return render(request, "search.html", context)
 
 def contact(request):
     form_class = ContactForm
@@ -41,8 +41,7 @@ def contact(request):
 
             # Email the profile with the
             # contact information
-            template =
-                get_template('contact_template.txt')
+            template = get_template('contact_template.txt')
             context = {
                 'contact_name': contact_name,
                 'contact_email': contact_email,
