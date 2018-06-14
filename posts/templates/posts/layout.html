@@ -27,29 +27,22 @@
     </div>
        <div class="col s3">
          {% include "search_form.html" %} 
-    
        </div>
        <div class="col s6">
       <ul class="right hide-on-med-and-down">
        {% if user.is_authenticated %}
-        
-      <li> <a href="{% url 'account:profile' user.username %}">{{ user.profile.get_screen_name }} </a> </li>
+          <li> <a href="{% url 'account:profile' user.username %}">{{ user.profile.get_screen_name }} </a> </li>
           <li><a href="{% url 'logout' %}"> Logout </a></li>    
           <li><a href="{% url 'posts:post_create' %}"> Create Post </a></li>          
        {% else %}
-          <li> <a href="{% url 'login' %}">Log in </a></li>
-           <li> <a href="{% url 'signup' %}">Sign Up </a></li>
-         
-          
-          
+           <li> <a href="{% url 'login' %}">Log in </a></li>
+           <li> <a href="{% url 'signup' %}">Sign Up </a></li>   
        {% endif %}
+           <li> <a href="{% url 'contact' %}"> Contact Us </a></li>
       </ul>
-
       <ul id="nav-mobile" class="side-nav">
        {% if user.is_authenticated %}
           <li><a href="#">:{{user}}</a></li>
-
-     
           <li><a href="{% url 'logout' }"> Logout </a></li>
           
        {% else %}
