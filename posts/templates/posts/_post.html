@@ -30,7 +30,7 @@
     </div>
         {% endif %}
                   <time class="time"><a href="{%url 'posts:detail' post.pk  %}">{{ post.date|naturaltime }}</a></time>
-                    <a href="{% url 'account:profile' post.user.username %}">{{ post.user.profile.get_screen_name }} </a>
+                    <a href="{% url 'posts:profile' post.user.username %}">{{ post.user.profile.get_screen_name }} </a>
 
                 </div>
      

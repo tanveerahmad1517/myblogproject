@@ -5,9 +5,16 @@
   <form method="post" enctype="multipart/form-data">
       <div class="row">
         <div class="input-field col s12">
+             {% if user.is_authenticated %}
+
        {% render_field form.user|add_class:'select-dropdown dropdown-trigger'  %}
        <label for="title"> User </label>
          </div>
+
+      {% else %}
+      sdf s
+           {% endif %}
+
      </div>
      <div class="input-field col s12">
         {% render_field form.title|add_class:'validate' %}

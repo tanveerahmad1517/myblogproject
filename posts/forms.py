@@ -8,13 +8,27 @@ class TinyMCEWidget(TinyMCE):
         return False
 
 
-class PostForm(forms.ModelForm):
+
+
+class TweetModelForm(forms.ModelForm):
     description = forms.CharField(
         widget=TinyMCEWidget(
             attrs={'required': False, 'cols': 30, 'rows': 10}
         )
     )
-
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = [
+            #"user",
+            'title', 'description', 'image'
+
+        ]
+        #exclude = ['user']
+
+    def clean_content(self, *args, **kwargs):
+        content = self.cleaned_data.get("content")
+        if content == "abc":
+            raise forms.ValidationError("Cannot be ABC")
+        return content
+
+

@@ -10,10 +10,10 @@ from django.utils.html import escape
 from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse
 from tinymce import HTMLField
-
+from django.conf import  settings
 
 class Post(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user =   models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
     date = models.DateTimeField(auto_now_add=True)
     title = models.TextField(max_length=255)
     description = HTMLField('Description')

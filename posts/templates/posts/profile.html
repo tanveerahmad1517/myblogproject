@@ -50,9 +50,9 @@
             <li><i class="material-icons">web </i> <a href="{{ page_user.profile.url }}" target="_blank">{{ page_user.profile.url }}</a></li>
           {% endif %}
           {% if page_user.profile.gender == 'Male' %}
-          <li><i class="material-icons sep">person_pin </i>{{ page_user.profile.gender }}</li>
+          <li><i class="material-icons sep">person_pin </i>Mister{{ page_user.profile.gender }}</li>
           {% elif page_user.profile.gender == 'Female' %}
-          <li><i class="material-icons sep">person_pin </i> {{ page_user.profile.gender }}</li>
+          <li><i class="material-icons sep">person_pin </i>Mss {{ page_user.profile.gender }}</li>
           {% else %}
           <li><i class="material-icons sep">person_pin </i> Please Select Gender </li>
           {% endif %}

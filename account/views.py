@@ -3,13 +3,17 @@ import json
 from django_ajax.decorators import ajax
 # Create your views here.
 from posts.models import Post
+from account.models import  Profile
 from django.views.generic import ListView, DetailView
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.views.generic.edit import CreateView, View
+from django.views.generic.edit import CreateView, UpdateView, View
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
+from account.forms import UserEditForm, ProfileEditForm
+from django.contrib import messages
+
 
 posts_NUM_PAGES = 10
 @login_required(login_url='/login/')
@@ -45,3 +49,31 @@ class SignUpView(CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'registration/signup.html'
+# class UpdateViewProfile(UpdateView):
+#     model = Profile
+#     fields = '__all__'
+#
+#     template_name = 'posts/edit_profile.html'
+#     context_object_name = 'profile_form'
+
+
+def edit(request):
+    if request.method == 'POST':
+        user_form = UserEditForm(instance=request.user,
+                                 data=request.POST)
+        profile_form = ProfileEditForm(instance=request.user.profile,
+                                       data=request.POST,
+                                       files=request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Profile updated successfully')
+        else:
+            messages.error(request, 'Error updating your profile')
+    else:
+        user_form = UserEditForm(instance=request.user)
+        profile_form = ProfileEditForm(instance=request.user.profile)
+    return render(request,
+                  'edit.html',
+                  {'user_form': user_form,
+                   'profile_form': profile_form})
