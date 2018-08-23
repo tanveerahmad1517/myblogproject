@@ -32,4 +32,3 @@ class TweetModelForm(forms.ModelForm):
         return content
 
 
-#sssss
